@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Divider(),
             Text(
-              'This is a a list tile in a card',
+              'This is a list tile in a card',
               style: Theme.of(context).textTheme.title,
               textAlign: TextAlign.center,
             ),
