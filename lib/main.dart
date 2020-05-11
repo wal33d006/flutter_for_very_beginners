@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_for_very_beginners/api_list.dart';
+import 'package:flutter_for_very_beginners/login.dart';
 import 'package:flutter_for_very_beginners/my_new_screen.dart';
 
 void main() => runApp(MyApp());
@@ -41,13 +44,18 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          if (formKey.currentState.validate()) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MyNewScreen(controller.text),
-              ),
-            );
-          }
+//          if (formKey.currentState.validate()) {
+//            Navigator.of(context).push(
+//              MaterialPageRoute(
+//                builder: (context) => MyNewScreen(controller.text),
+//              ),
+//            );
+//          }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MyApiList(),
+            ),
+          );
         },
       ),
       body: Column(
@@ -55,7 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
           Text('Hello Dash F-01'),
           ListTile(
             title: Text('Waleed Arshad'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+              );
+            },
             subtitle: Text('waleed@gmail.com'),
             leading: CircleAvatar(
               child: Text('W'),
@@ -119,14 +133,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: StadiumBorder(),
                     child: Text('Get text from text field'),
                     onPressed: () {
-                      print(controller.text);
-                      setState(() {
-                        if (myButtonColor == Colors.blue) {
-                          myButtonColor = Colors.orange;
-                        } else {
-                          myButtonColor = Colors.blue;
-                        }
-                      });
+                      insertValueFromTextFieldToFirebase();
+//                      print(controller.text);
+//                      setState(() {
+//                        if (myButtonColor == Colors.blue) {
+//                          myButtonColor = Colors.orange;
+//                        } else {
+//                          myButtonColor = Colors.blue;
+//                        }
+//                      });
                     },
                     color: Colors.green,
                   ),
@@ -137,5 +152,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  insertValueFromTextFieldToFirebase () async {
+    Firestore.instance
+        .collection('books')
+        .document('5678')
+        .setData({'title': controller.text, 'author': controller.text});
   }
 }
