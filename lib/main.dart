@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_for_very_beginners/animation.dart';
 import 'package:flutter_for_very_beginners/api_list.dart';
+import 'package:flutter_for_very_beginners/google_maps.dart';
 import 'package:flutter_for_very_beginners/login.dart';
-import 'package:flutter_for_very_beginners/my_new_screen.dart';
+import 'package:flutter_for_very_beginners/rive.dart';
 
 void main() => runApp(MyApp());
 
@@ -148,13 +150,43 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ],
-          )
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GoogleMapsScreen(),
+                ),
+              );
+            },
+            child: Text('Maps'),
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AnimationScreen(),
+                ),
+              );
+            },
+            child: Text('Animation'),
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Rive(),
+                ),
+              );
+            },
+            child: Text('Rive'),
+          ),
         ],
       ),
     );
   }
 
-  insertValueFromTextFieldToFirebase () async {
+  insertValueFromTextFieldToFirebase() async {
     Firestore.instance
         .collection('books')
         .document('5678')
